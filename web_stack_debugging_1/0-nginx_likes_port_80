@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# configure my apache file so that when querying the root to return Holberton school
+
+sudo apt-get update
+sudo apt-get install apache2
+sudo /etc/init.d/apache2 start
+echo "Hello Holberton" | sudo tee /var/www/html/index.html
+sudo service apache2 restart
+Olivier Ishimwe
+22:31
+#!/usr/bin/env bash
+# Configures an Nginx server to listen on port 80.
+
+rm /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+service nginx restart

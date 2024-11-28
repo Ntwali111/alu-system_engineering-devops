@@ -20,15 +20,15 @@ new_config="server {
 
     server_name _;  # Respond to any server name
 
-    location / {
-        try_files \$uri \$uri/ =404;  # Serve files or return 404
+ location / {
+        try_files $uri $uri/ =404;  # Serve files or return 404
     }
 
+    # Add the redirect location block here
     location /redirect_me {
         return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;  # Permanent redirect
     }
 }
-"
 
 # Write the new configuration to the default site
 echo "$new_config" | sudo tee /etc/nginx/sites-available/default > /dev/null

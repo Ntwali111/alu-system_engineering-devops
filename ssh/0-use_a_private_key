@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
-# This script connects to a remote server using SSH with a specific private key
-
-ssh -i ~/.ssh/school ubuntu@98.84.152.191
+# the command below contains the word ssh for protocol -i for key and remote@host
+ssh -i ~/.ssh/school ubuntu@54.147.6.33

@@ -1,6 +1,4 @@
-# SSH configuration for connecting without typing a password
-Host myserver
-    HostName 3.91.100.7  
-    User ubuntu
-    IdentityFile ~/.ssh/school
+#!/usr/bin/env bash
+Host ubuntu@6355-web-01
+    PreferredAuthentications publickey
     PasswordAuthentication no

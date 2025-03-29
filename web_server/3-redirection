@@ -1,47 +1,11 @@
 #!/usr/bin/env bash
-# Script to install Nginx and configure it to redirect /redirect_me to another page.
+#This script can automate nginx installation to a new machine and configure redirections.
 
-# Update package index
+#install nginx to a new machine
 sudo apt update -y
-
-# Install Nginx
 sudo apt install nginx -y
 
-# Remove the default server block if it exists
-sudo rm -f /etc/nginx/sites-enabled/default
+#make redirection to another page
+sudo sed -i '/^\tserver_name.*;$/a \\n\        location /redirect_me {\n            return 301 http://www.gty.org;\n        }' /etc/nginx/sites-available/default
 
-# Create the new server block configuration
-new_config="server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    root /var/www/html;  # Correct document root
-    index index.html;  # Default index file
-
-    server_name _;  # Respond to any server name
-
-    location / {
-        try_files \$uri \$uri/ =404;  # Serve files or return 404
-    }
-
-    location /redirect_me {
-        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;  # Permanent redirect
-    }
-}
-"
-
-# Write the new configuration to the default site
-echo "$new_config" | sudo tee /etc/nginx/sites-available/default > /dev/null
-
-# Create the document root directory and the index.html file
-sudo mkdir -p /var/www/html
-echo "Holberton School" | sudo tee /var/www/html/index.html > /dev/null
-
-# Enable the new site configuration
-sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
-
-# Test Nginx configuration
-sudo nginx -t
-
-# Restart Nginx
 sudo service nginx restart

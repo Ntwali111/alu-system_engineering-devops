@@ -1,1 +1,2 @@
-ssh
+This file contains scripts that relates to working
+with servers...
